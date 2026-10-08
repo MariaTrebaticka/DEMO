@@ -3,7 +3,7 @@ name: Deploy Review App to GitHub Pages
 on:
   push:
     branches:
-      - main # Ak máte hlavnú vetvu master, prepíšte na master
+      - main
 
 permissions:
   contents: read
@@ -29,13 +29,10 @@ jobs:
         with:
           node-version: 20
 
-      - name: Create temporary Vite Config
-        run: |
-          echo "import { defineConfig } from 'vite';" > vite.config.js
-          echo "export default defineConfig({ base: '/DEMO/' });" >> vite.config.js
-
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm install
+          npm install @vitejs/plugin-react --save-dev
 
       - name: Build
         run: npm run build
